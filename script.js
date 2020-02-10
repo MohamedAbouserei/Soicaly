@@ -8,10 +8,10 @@ this.password=password;
 this.status=status;
 this.id=id;
 }
-storeObjectllo = function () {
-    localStorage.setItem(this.email, JSON.stringify(this));
+static storeObjectllo = function (userObject) {
+    localStorage.setItem(userObject.email, JSON.stringify(userObject));
 }
-getAllObjects = function (){
+static getAllObjects = function (){
     var archive = {}, // Notice change here
     keys = Object.keys(localStorage),
     i = keys.length;
@@ -21,7 +21,7 @@ getAllObjects = function (){
     }
 return archive;
  }
- getObjectbyEmail = function (email){
+ static getObjectbyEmail = function (email){
     
     var archive = localStorage.getItem(email);
     
