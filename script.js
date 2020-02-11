@@ -22,9 +22,8 @@ static getAllObjects = function (){
 return archive;
  }
  static getObjectbyEmail = function (email){
-    
+    console.log("The mail you send Is:"+email);
     var archive = localStorage.getItem(email);
-    
-return archive;
+	return archive;
  }
 }
