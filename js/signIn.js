@@ -19,16 +19,17 @@ function printEmail() {
 	if (email.value.length != 0) {
 		if (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email.value) && password.value.length >= 8) {
 			returnedObj=User.getObjectbyEmail(email.value);
-			var test=JSON.parse(returnedObj);
-			console.log(test.password)
-			console.log(test.email)
+			if (returnedObj != null) {
+				var test=JSON.parse(returnedObj);
 			if (email.value == test.email && password.value == test.password) {
 			console.log("Donnnnnnnnnnne")
 			User.storeToSessionStorage(test)
 			test.status=1;
 			User.storeToSessionStorage(test)
 			error.innerHTML = ""	
-			//window.location.replace("https://www.google.com");
+			window.location.replace("Soicaly/posts.html");
+				}
+
 			}
 			else{
 				error.innerHTML = "Sorry The Username Or Passowrd Are In Correct";
