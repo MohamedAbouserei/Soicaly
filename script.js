@@ -26,4 +26,9 @@ return archive;
     var archive = localStorage.getItem(email);
 	return archive;
  }
+static onlineUsers=[];
+
+ static storeToSessionStorage = function (sessionStore) {
+    sessionStorage.setItem(sessionStore.email,JSON.stringify(sessionStore))
+    }
 }
