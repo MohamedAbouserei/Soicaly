@@ -1,0 +1,139 @@
+.navbar
+{
+
+    background-color: white;
+}
+body {
+  background-image: url('images/6Iah3P.jpg');
+	background-repeat: no-repeat;
+}
+
+.social-box .box{
+
+    background: #FFF;
+    border-radius: 10px; 
+    padding: 50px 10px;
+    margin: 20px 0px;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+
+.social-box .box:hover{
+   box-shadow: 0 0 6px #4183D7;
+}
+
+.social-box .box .box-text{
+    margin:20px 0px;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+.social-box .box .box-btn a{
+    text-decoration: none;
+    color: #4183D7;
+    font-size: 16px;
+}
+
+.fa{
+     color:#4183D7;
+}
+#usersSideMenu
+{
+  background: #FFF;
+    border-radius: 10px; 
+    padding: 40px 10px;
+    margin: 20px 0px;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+.main-box.no-header {
+    padding-top: 20px;
+}
+.main-box {
+    background: #FFFFFF;
+    -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    box-shadow: 1px 1px 2px 0 #CCCCCC;
+    margin-bottom: 16px;
+    -webikt-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.table a.table-link.danger {
+    color: #e74c3c;
+}
+.label {
+    border-radius: 3px;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+.user-list tbody td .user-subhead {
+    font-size: 0.875em;
+    font-style: italic;
+}
+.user-list tbody td .user-link {
+    display: block;
+    font-size: 1.25em;
+    padding-top: 3px;
+    margin-left: 60px;
+}
+a {
+    color: #3498db;
+    outline: none!important;
+}
+.user-list tbody td>img {
+    position: relative;
+    max-width: 50px;
+    float: left;
+    margin-right: 15px;
+}
+
+.table thead tr th {
+    text-transform: uppercase;
+    font-size: 0.875em;
+}
+.table thead tr th {
+    border-bottom: 2px solid #e7ebee;
+}
+.table tbody tr td:first-child {
+    font-size: 1.125em;
+    font-weight: 300;
+}
+.table tbody tr td {
+    font-size: 0.875em;
+    vertical-align: middle;
+    border-top: 1px solid #e7ebee;
+    padding: 12px 8px;
+}
+.button {
+  padding: 5px 90px;
+ margin-right: 4px;  
+font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+
+  background-color: #6666FF;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #9999FF;
+}
+
+.button:hover {background-color: #4C4CFF}
+
+.button:active {
+  background-color: #4C4CFF;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.scroll {
+  
+    overflow-y: scroll;
+    max-height:350px;
+	width:700px;
+
+
+}
