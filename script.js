@@ -7,8 +7,8 @@ class User {
         this.status = status;
     }
     static storeObjectllo = function (userObject) {
-        if (!id) {
-            const lastInsertedId = JSON.parse(JlocalStorage.getItem("lastInsertedId"));
+        if (!this.id) {
+            var lastInsertedId = JSON.parse(localStorage.getItem("lastInsertedId"));
             lastInsertedId = lastInsertedId ? lastInsertedId : 0;
             userObject.id = ++lastInsertedId;
         }

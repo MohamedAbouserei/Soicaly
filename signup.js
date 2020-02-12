@@ -23,6 +23,7 @@ signupForm.onsubmit = (e) => {
      const user = new User(name.value,dob.value,email.value,password.value,true);
      User.storeObjectllo(user);
      sessionStorage.setItem("onlineuser",email.value);
+     location.replace("./posts.html");
     }
 }
 
