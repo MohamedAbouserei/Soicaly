@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <form id="signup-form" >
+        <div class="inputGroup">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Write your name" />
+            <small id="name-error" class="text-danger"></small>
+        </div>
+
+        <div class="inputGroup">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Write your email" />
+            <small id="email-error" class="text-danger"></small>
+        </div>
+
+        <div class="inputGroup">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Write your password" />
+            <small id="password-error" class="text-danger"></small>
+        </div>
+
+        <div class="inputGroup">
+            <label for="password-confirm">Confirm Password</label>
+            <input type="password" class="form-control" id="password-confirm" placeholder="Confirm your password" />
+            <small id="confirm-password-error" class="text-danger"></small>
+        </div>
+
+        <div class="inputGroup">
+            <label for="dob">Date Of Birth</label>
+            <input type="date" class="form-control" id="dob" placeholder="Your date of birth">
+            <small id="date-error" class="text-danger"></small>
+        </div>
+
+        <div class="inputGroup">
+            <button type="submit">Sign Up</button>
+        </div>
+    </form>
+
+    <script src="script.js"></script>
+    <script src="signup.js"></script>
+</body>
+
+</html>
