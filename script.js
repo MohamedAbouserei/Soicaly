@@ -24,7 +24,20 @@ return archive;
  static getObjectbyEmail = function (email){
     
     var archive = localStorage.getItem(email);
-    
+    console.log(email);
 return archive;
+ }
+ static getAllPosts = function (){
+    var archive = new Array();
+    // Notice change here
+   var keys = Object.keys(localStorage),
+    i = keys.length;
+
+    while ( i-- ) {
+       
+        if(!keys[i].indexOf('@') > -1 )
+    archive[ keys[i] ] = localStorage.getItem( keys[i] );
+    }
+    return archive;
  }
 }
