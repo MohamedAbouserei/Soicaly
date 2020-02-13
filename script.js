@@ -45,4 +45,13 @@ class User {
         }
         return archive;
     }
+    static logout =function()
+{
+    var returnedObj=JSON.parse(User.getObjectbyEmail(sessionStorage.getItem("onlineuser")));
+    returnedObj.status=false;
+    User.storeObjectllo(returnedObj)
+    sessionStorage.removeItem("onlineuser");
+    window.location.replace("./signIn.html");
+
+}
 }

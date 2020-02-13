@@ -24,13 +24,12 @@ static storeComment = function (key,comment,name)
     archive.comments=archive.comments.concat(name+":"+comment);
     localStorage.setItem(archive.time, JSON.stringify(archive));
     
-    
-
 }
+
 }
 getPostData = function (local) 
 {
-    sessionStorage.setItem("onlineuser", "medoaboserii@gmail.com");
+    //sessionStorage.setItem("onlineuser", "medoaboserii@gmail.com");
     var posttext=document.getElementById("posttext").value;
     if (posttext != '') 
         {
@@ -154,3 +153,7 @@ document.addEventListener('keypress',function(e){
 
      }
  });
+ document.querySelector("#logout").addEventListener("click",function(e){
+    User.logout()
+ });
+ 
