@@ -1,11 +1,15 @@
-
+var myUser = new User("mohamed","1/4/1996","mohamed@gmail.com","12345678","0","1");
+var otherUser = new User("ahmed","1/4/1996","ahmed@gmail.com","12345678","0","1");
+var thirdUser = new User("youssef","1/4/1996","youssef@gmail.com","12345678","0","1");
 var email=document.getElementById("email");
 var password=document.getElementById("password");
 var returnedObj;
 var error=document.getElementById("notFound");
 var loginBtn=document.getElementById("login");
 var form=document.getElementById("form");
-
+User.storeObjectllo(myUser);
+User.storeObjectllo(otherUser)
+ User.storeObjectllo(thirdUser)
 
 form.addEventListener("submit", function(event){
   event.preventDefault();
@@ -15,32 +19,41 @@ function printEmail() {
 	if (email.value.length != 0) {
 		if (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email.value) && password.value.length >= 8) {
 			returnedObj=User.getObjectbyEmail(email.value);
+			console.log("this the returened object"+returnedObj)
 			if (returnedObj != null) {
 				var test=JSON.parse(returnedObj);
 			if (email.value == test.email && password.value == test.password) {
 			console.log("Donnnnnnnnnnne")
-			sessionStorage.setItem("onlineuser",test.email);
-			test.status=true;
-			User.storeObjectllo(test)
-			error.innerHTML = ""	
-			window.location.replace("./posts.html");
-				}
-
-			
-			else{
 			// User.storeToSessionStorage(test)
 			test.status=1;
 			// User.storeToSessionStorage(test)
-			error.innerHTML = ""	
-			window.location.replace("posts.html");
+			error.innerHTML = ""
+			var userEmail=email.value;
+			console.log(userEmail)	
+			window.location.replace("Soicaly/posts.html");
 				}
 
+				else {
+				printErrorMessage()
 			}
-			
+
+			}if (returnedObj == null) {
+				printErrorMessage()
+				}
+		
 		}
 	
 	
 	}
 
 }
+
+function printErrorMessage(argument) {
+	error.innerHTML = "Sorry The Username Or Passowrd Are In Correct";
+	password.value=""
+	console.log("Sorrrrraaaaaaaaaaaaay")
+		
+}
+		
+
 loginBtn.addEventListener("click",printEmail)
