@@ -1,5 +1,5 @@
 class User {
-    constructor(name,DOB,email,password,phone,status,id)
+    constructor(name,DOB,email,password,phone,status,id,imagesrc)
 {
 this.name=name;
 this.DOB=DOB;
@@ -8,6 +8,7 @@ this.password=password;
 this.phone=phone
 this.status=status;
 this.id=id;
+this.imagesrc=imagesrc
 }
 static storeObjectllo = function (userObject) {
     localStorage.setItem(userObject.email, JSON.stringify(userObject));
@@ -52,17 +53,22 @@ password.value=sessionobj.password
 phone.value=sessionobj.phone
 email.value=sessionobj.email
 dob.value=sessionobj.DOB
+image.src=sessionobj.imagesrc
+//image.src=sessionobj.imagesrc
 }
 
 
 submitButton.addEventListener("click",editObject)
-function editObject()
+function editObject(ev)
 {
+    let imagen = image.getAttribute('src');
+    console.log(imagen)
  sessionobj.name=username.value;
  sessionobj.password=password.value;
  sessionobj.phone=phone.value;
  sessionobj.email=email.value;
  sessionobj.DOB=dob.value
+ sessionobj.imagesrc=image.src
  User.storeObjectllo(sessionobj)
  setInputField(sessionobj)
  console.log("your data saved")
