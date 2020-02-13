@@ -51,7 +51,9 @@ class User {
     returnedObj.status=false;
     User.storeObjectllo(returnedObj)
     sessionStorage.removeItem("onlineuser");
+    localStorage.setItem("newlist", "1");
     window.location.replace("./signIn.html");
+
 
 }
 }
