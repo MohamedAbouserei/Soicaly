@@ -6,19 +6,34 @@ this.text=text;
 this.location=location;
 this.name=name;
 this.time=time;
+this.comments=[];
 }
 storePost = function () 
 {
     localStorage.setItem(this.time, JSON.stringify(this));
 }
-
+static getPost = function (postKey) 
+{
+    var archive = JSON.parse(localStorage.getItem(postKey));
+    
+    return archive;
+}
+static storeComment = function (key,comment,name) 
+{
+    var archive = JSON.parse(localStorage.getItem(key));
+    archive.comments=archive.comments.concat(name+":"+comment);
+    localStorage.setItem(archive.time, JSON.stringify(archive));
+    
+    
 
 }
-
+}
 getPostData = function (local) 
 {
-    sessionStorage.setItem("onlineuser", "medoaboserii");
+    sessionStorage.setItem("onlineuser", "medoaboserii@gmail.com");
     var posttext=document.getElementById("posttext").value;
+    if (posttext != '') 
+        {
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -30,7 +45,10 @@ getPostData = function (local)
     document.getElementById("posttext").value="";
     newpost.storePost();
     $("#exampleModal").modal("hide");
-    
+        }
+        else{
+            alert("You have to Write Something")
+        }
     
 }
 noPost=0;
@@ -44,12 +62,16 @@ setInterval(function(){
 
     while ( i-- ) {
        
-        if(!keys[i].indexOf('@') > -1 )
+        if(!keys[i].includes("@") && !keys[i].includes("lastInsertedId") && !keys[i].includes("newcomment"))
     archive[ keys[i] ] = JSON.parse(localStorage.getItem( keys[i] ));
     }
-    if(keys.length>noPost){
+    if(keys.length>noPost || localStorage.getItem("newcomment") != "0"){
     PostContianer.innerHTML="";
     PostContianer.innerHTML += preparePost();
+    var delay = setTimeout(function () {
+        localStorage.setItem("newcomment", "0");
+    }, 1500);
+    
     }
     
 }, 1000 );
@@ -62,7 +84,7 @@ function preparePost()
 
     while ( i-- ) {
        
-        if(!keys[i].indexOf('@') > -1 )
+        if(!keys[i].includes("@") && !keys[i].includes("lastInsertedId") && !keys[i].includes("newcomment"))
     archive[ keys[i] ] = JSON.parse(localStorage.getItem( keys[i] ));
     }
     var card="";
@@ -77,18 +99,41 @@ function preparePost()
             card +=  '                <div class=\"box-title\">\n' ;
             
             if(Data.hasOwnProperty("location"))
-            card +=  '                  <h3>"'+Data.name+"         "+"is at "+Data.location+'"</h3>\n' ;
+            card +=  '                  <h3>'+Data.name+"     "+"is at "+Data.location+'</h3>\n<span class=\"text-muted\">'+key+'</span>\n' ;
             else
-            card +=  '                  <h3>"'+Data.name+'"</h3>\n' ;
+            card +=  '                  <h3>'+Data.name+'</h3>\n<span class=\"text-muted\">'+key+'</span>\n' ;
             card +=  '                </div>\n' ;
-            card +=  '                <div class=\"box-text\">\n' ;
-            card +=  '                  <span>"'+Data.text+'"</span>\n' ;
+            card +=  '                <div class=\"box-text\" style="overflow-wrap: break-word;">\n' ;
+            card +=  '                  <span>'+Data.text+'</span>\n' ;
             card +=  '                </div>\n' ;
             card +=  '                <div class=\"box-btn\">\n' ;
             card +=  '                    <a href=\"#\">Comments</a>\n' ;
             card +=  '               </div>\n' ;
+           //comments
+           if(Data.comments.length>0){
+               for (var i=0;i<Data.comments.length;i++)             
+             { 
+                var commentContent =Data.comments[i].split(":");
+            card +=   '<div class=\"col-sm-12\">\n' ;
+            card +=   '<div class=\"panel panel-default\">\n' ;
+            card +=   '<div class=\"panel-heading\">\n' ;
+            card +=   '<strong>'+commentContent[0]+'</strong>' ;
+            card +=   '</div>\n' ;
+            card +=   '<div class=\"panel-body\">\n' ;
+            card +=   ''+commentContent[1]+'\n' ;
+            card +=   '</div><!-- /panel-body -->\n' ;
+            card +=   '</div><!-- /panel panel-default -->\n' ;
+            card +=   '</div><!-- /col-sm-12 -->\n' ;
+            card +=   '<hr>\n' ;
+             }} 
+            
+            
+            card +=  '                <div class=\"box-btn\">\n' ;
+            card +=  '                    <input type=\"text\" placeholder="write a comment" class="form-control" rows="5" name="'+key+'" id="Comment" >\n' ;
+            card +=  '               </div>\n' ;
             card +=  '               </div>' ; 
         }
+          
         }
   
  
@@ -96,3 +141,16 @@ function preparePost()
     return card;
 
 }
+
+document.addEventListener('keypress',function(e){
+    if(e.target && e.target.id== 'Comment' && e.key === 'Enter'){
+        
+        if (e.target.value != '') 
+        {
+            localStorage.setItem("newcomment", "1");
+            Post.storeComment(e.target.name,e.target.value,JSON.parse(User.getObjectbyEmail(sessionStorage.getItem("onlineuser"))).name)
+            e.target.value="";
+        }
+
+     }
+ });

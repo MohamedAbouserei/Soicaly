@@ -80,10 +80,7 @@
             <div class="box scroll" id="Posts">
           
           </div>
-          <script>
-         
-   
-          </script>
+          
       </article>
       <div class="col-1 col-md-4" id="usersSideMenu">
         <div class="row">
@@ -183,26 +180,7 @@
                                       <td>
                                           <a href="#">marlon@brando.com</a>
                                       </td>
-                                      <td style="width: 20%;">
-                                          <a href="#" class="table-link">
-                                              <span class="fa-stack">
-                                                  <i class="fa fa-square fa-stack-2x"></i>
-                                                  <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                              </span>
-                                          </a>
-                                          <a href="#" class="table-link">
-                                              <span class="fa-stack">
-                                                  <i class="fa fa-square fa-stack-2x"></i>
-                                                  <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                              </span>
-                                          </a>
-                                          <a href="#" class="table-link danger">
-                                              <span class="fa-stack">
-                                                  <i class="fa fa-square fa-stack-2x"></i>
-                                                  <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                              </span>
-                                          </a>
-                                      </td>
+                                    
                                   </tr>
                               </tbody>
                           </table>
@@ -262,6 +240,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script src="http://maps.google.com/maps/api/js?key=AIzaSyAnENYUuM2sW2SmhIIjmIkK3hEqKhTlkbE&sensor=false"></script>
 <script>
@@ -287,7 +266,8 @@ function showPosition(position){
 $("#savePost").click(function(){
         getPostData(local);      
       });
-      
+      localStorage.setItem("newcomment", "0");
+
 
 </script>
 </body>
