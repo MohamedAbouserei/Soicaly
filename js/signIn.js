@@ -26,12 +26,17 @@ function printEmail() {
 			window.location.replace("./posts.html");
 				}
 
-			}
+			
 			else{
-				error.innerHTML = "Sorry The Username Or Passowrd Are In Correct";
-				password.value=""
-				console.log("Sorrrrraaaaaaaaaaaaay")
+			// User.storeToSessionStorage(test)
+			test.status=1;
+			// User.storeToSessionStorage(test)
+			error.innerHTML = ""	
+			window.location.replace("posts.html");
+				}
+
 			}
+			
 		}
 	
 	
