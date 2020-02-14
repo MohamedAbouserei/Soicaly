@@ -1,4 +1,5 @@
-// validation
+
+        // validation
 var submitButton = document.getElementById("submit");
 var username = document.getElementById("userName");
 var password = document.getElementById("password");
@@ -23,18 +24,7 @@ function changeImagePhoto(e) {
     uploadImageButton.style.display = "none"
 }
 
-// function getBase64Image(img) {
-//     var canvas = document.createElement("canvas");
-//     canvas.width = img.width;
-//     canvas.height = img.height;
 
-//     var ctx = canvas.getContext("2d");
-//     ctx.drawImage(img, 0, 0);
-
-//     var dataURL = canvas.toDataURL("image/png");
-
-//     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-// }
 
 // end of image data
 myemail = sessionStorage.getItem("onlineuser");
@@ -63,8 +53,8 @@ function editObject(ev) {
     str = ""
 
     if (validateName() && validatePassword() && validatePhonenumber()) {
-        let imagen = image.getAttribute('src');
-        console.log(imagen)
+        var imagen = image.getAttribute('src');
+
         sessionobj.name = username.value;
         sessionobj.password = password.value;
         sessionobj.phone = phone.value;
@@ -73,7 +63,7 @@ function editObject(ev) {
         sessionobj.imagesrc = image.src
         User.storeObjectllo(sessionobj)
         setInputField(sessionobj)
-        console.log("your data saved")
+        alert("your data saved")
     }
 }
 
