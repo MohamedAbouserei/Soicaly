@@ -21,6 +21,16 @@ nav{
    margin: auto;
 
 }
+.container
+{
+  background: #FFFFFF;
+  border-radius: 25px;
+  border-color:  #00D6D9;
+   border-style: solid;
+  border-width: thick;
+   margin: auto;
+	padding-right:15px;
+}
 label.logo{
   color: white;
   font-size: 35px;
