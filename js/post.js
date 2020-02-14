@@ -219,7 +219,7 @@ function prepareUsers() {
             record += '                                      </td>\n';
 
             record += '                                      <td style=\"width: 20%;\">\n';
-            record += '                                          <a href=\"#\" class=\"table-link\">\n';
+            record += '                                          <a href=\"#\" data-email="'+Data.email+'" onclick="onChatButtonClick(this)" class=\"table-link\">\n';
             record += '                                              <span class=\"fa-stack\">\n';
             record += '                                                  <i class=\"fa fa-square fa-stack-2x\"></i>\n';
             record += '                                                  <i class=\"fa fa-comment fa-stack-1x fa-inverse\"></i>\n';
