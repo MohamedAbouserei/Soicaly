@@ -1,8 +1,3 @@
-
-if(sessionStorage.getItem("onlineuser")){
-    location.replace("./posts.html");
-}
-
 const name = document.getElementById("name");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -18,12 +13,11 @@ const dateError = document.getElementById("date-error");
 
 signupForm.onsubmit = (e) => {
     e.preventDefault();
-
     if (validateForm()) {
-     const user = new User(name.value,dob.value,email.value,password.value,true);
-     User.storeObjectllo(user);
-     sessionStorage.setItem("onlineuser",email.value);
-     location.replace("./posts.html");
+        const user = new User(name.value, dob.value, email.value, password.value, true);
+        User.storeObjectllo(user);
+        sessionStorage.setItem("onlineuser", email.value);
+        location.replace("./posts.html");
     }
 }
 
@@ -41,6 +35,9 @@ function validateForm() {
     }
     if (!password.value) {
         passwordError.innerHTML = "Password can not be empty";
+        isValid = false;
+    } else if (password.value.length < 8) {
+        passwordError.innerHTML = "Password must be at least 8 characters";
         isValid = false;
     }
     if (passwordConfirm.value != password.value) {

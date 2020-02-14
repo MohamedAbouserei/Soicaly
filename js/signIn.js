@@ -1,59 +1,58 @@
-var myUser = new User("mohamed","1/4/1996","mohamed@gmail.com","12345678","0","1");
-var otherUser = new User("ahmed","1/4/1996","ahmed@gmail.com","12345678","0","1");
-var thirdUser = new User("youssef","1/4/1996","youssef@gmail.com","12345678","0","1");
-var email=document.getElementById("email");
-var password=document.getElementById("password");
+var myUser = new User("mohamed", "1/4/1996", "mohamed@gmail.com", "12345678", "0", "1");
+var otherUser = new User("ahmed", "1/4/1996", "ahmed@gmail.com", "12345678", "0", "1");
+var thirdUser = new User("youssef", "1/4/1996", "youssef@gmail.com", "12345678", "0", "1");
+var email = document.getElementById("email");
+var password = document.getElementById("password");
 var returnedObj;
-var error=document.getElementById("notFound");
-var loginBtn=document.getElementById("login");
-var form=document.getElementById("form");
+var error = document.getElementById("notFound");
+var loginBtn = document.getElementById("login");
+var form = document.getElementById("form");
 User.storeObjectllo(myUser);
 User.storeObjectllo(otherUser)
- User.storeObjectllo(thirdUser)
+User.storeObjectllo(thirdUser)
 
-form.addEventListener("submit", function(event){
-  event.preventDefault();
+form.addEventListener("submit", function (event) {
+	event.preventDefault();
 });
 
 function printEmail() {
 	if (email.value.length != 0) {
 		if (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email.value) && password.value.length >= 8) {
-			returnedObj=User.getObjectbyEmail(email.value);
-			console.log("this the returened object"+returnedObj)
+			returnedObj = User.getObjectbyEmail(email.value);
+			console.log("this the returened object" + returnedObj)
 			if (returnedObj != null) {
-				var test=JSON.parse(returnedObj);
-			if (email.value == test.email && password.value == test.password) {
-			console.log("Donnnnnnnnnnne")
-			// User.storeToSessionStorage(test)
-			test.status=1;
-			// User.storeToSessionStorage(test)
-			error.innerHTML = ""
-			var userEmail=email.value;
-			console.log(userEmail)	
-			window.location.replace("Soicaly/posts.html");
+				var test = JSON.parse(returnedObj);
+				if (email.value == test.email && password.value == test.password) {
+					console.log("Donnnnnnnnnnne")
+					// User.storeToSessionStorage(test)
+					test.status = 1;
+					// User.storeToSessionStorage(test)
+					error.innerHTML = ""
+					var userEmail = email.value;
+					console.log(userEmail)
+					sessionStorage.setItem("onlineuser", userEmail);
+					window.location.replace("./posts.html");
+				} else {
+					printErrorMessage()
 				}
 
-				else {
+			}
+			if (returnedObj == null) {
 				printErrorMessage()
 			}
 
-			}if (returnedObj == null) {
-				printErrorMessage()
-				}
-		
 		}
-	
-	
+
 	}
 
 }
 
 function printErrorMessage(argument) {
 	error.innerHTML = "Sorry The Username Or Passowrd Are In Correct";
-	password.value=""
+	password.value = ""
 	console.log("Sorrrrraaaaaaaaaaaaay")
-		
-}
-		
 
-loginBtn.addEventListener("click",printEmail)
+}
+
+
+loginBtn.addEventListener("click", printEmail)

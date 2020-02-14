@@ -1,4 +1,3 @@
-
 // validation
 var submitButton = document.getElementById("submit");
 var username = document.getElementById("userName");
@@ -8,12 +7,13 @@ var email = document.getElementById("email")
 var dob = document.getElementById("dob")
 var errorsContainer = document.getElementsByClassName("errors")[0];
 var errors = document.getElementById("error-messages");
-var str 
+var str
 // image 
 var image = document.getElementById("image");
 // var imgData = getBase64Image(image);
 var uploadImageButton = document.getElementById("imageupload")
 uploadImageButton.addEventListener("click", changeImagePhoto);
+
 function changeImagePhoto(e) {
     var reader = new FileReader();
     reader.onload = function () {
@@ -37,68 +37,79 @@ function changeImagePhoto(e) {
 // }
 
 // end of image data
-submitButton.addEventListener("click", validateName)
+myemail = sessionStorage.getItem("onlineuser");
 
-function validateName(e) {
-    e.preventDefault();
-    errorsContainer.style.display="none"
-    str=""
+var sessionobj = JSON.parse(User.getObjectbyEmail(myemail));
+window.addEventListener("load", setInputField);
 
+function setInputField() {
+    username.value = sessionobj.name
+    password.value = sessionobj.password
+    phone.value = sessionobj.phone
+    email.value = sessionobj.email
+    dob.value = sessionobj.DOB
+    if (sessionobj.imagesrc) {
+        image.src = sessionobj.imagesrc
+    }
+    //image.src=sessionobj.imagesrc
+}
+
+
+submitButton.addEventListener("click", editObject)
+
+function editObject(ev) {
+    ev.preventDefault();
+    errorsContainer.style.display = "none"
+    str = ""
+
+    if (validateName() && validatePassword() && validatePhonenumber()) {
+        let imagen = image.getAttribute('src');
+        console.log(imagen)
+        sessionobj.name = username.value;
+        sessionobj.password = password.value;
+        sessionobj.phone = phone.value;
+        sessionobj.email = email.value;
+        sessionobj.DOB = dob.value
+        sessionobj.imagesrc = image.src
+        User.storeObjectllo(sessionobj)
+        setInputField(sessionobj)
+        console.log("your data saved")
+    }
+}
+
+function validateName() {
     if (username.value === "") {
         str += "<li>Name is required</li>"
         errorsContainer.style.display = "block"
-        errors.innerHTML = str;
+        errors.innerHTML = str;        
+        return false;
     } else {
-
-        console.log(name)
+        return true;
     }
-
 }
-// validate password
-submitButton.addEventListener("click", validatePassword)
 
-function validatePassword(e) {
-    e.preventDefault();
-    errorsContainer.style.display="none"
-   
-    var passwordpattern = /[0-9]/;
-    if (password.value.match(passwordpattern)) {
+function validatePassword() {
+    if (password.value.length >= 8) {
         console.log("valid pass")
-    }
-    else {
-       
+        return true;
+    } else {
         str += "<li>Password is invalid</li>"
         errorsContainer.style.display = "block"
         errors.innerHTML = str;
+        return false;
     }
 }
 
 // validate phone
-submitButton.addEventListener("click", validatePhonenumber)
-
-function validatePhonenumber()
-{
-  var phoneno = /^\d{11}$/;
-  if(phone.value.match(phoneno))
-        {
-          console.log("valid phone")
-        }
-      else
-        {
-            str += "<li>Phone is invalid</li>"
-            errorsContainer.style.display = "block"
-            errors.innerHTML = str;
-        }
+function validatePhonenumber() {
+    var phoneno = /^\d{11}$/;
+    if (phone.value.match(phoneno)) {
+        console.log("valid phone")
+        return true;
+    } else {
+        str += "<li>Phone is invalid</li>"
+        errorsContainer.style.display = "block"
+        errors.innerHTML = str;
+        return false;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-

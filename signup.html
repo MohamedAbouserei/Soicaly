@@ -9,12 +9,16 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   -->
     <link rel="stylesheet" href="css/style.css">
-
-    <title>Sign Up</title>
+    <script>
+        if (sessionStorage.getItem("onlineuser")) {
+            location.replace("./posts.html");
+        }
+    </script>
+    <title>Socialy - Sign Up</title>
 </head>
 
 <body>
-    <form id="signup-form" >
+    <form id="signup-form">
         <div class="inputGroup">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" placeholder="Write your name" />
@@ -48,6 +52,7 @@
         <div class="inputGroup">
             <button type="submit">Sign Up</button>
         </div>
+        <a id="link" href="./signIn.html">Already a member?</a>
     </form>
 
     <script src="js/script.js"></script>
