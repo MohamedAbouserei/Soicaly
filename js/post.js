@@ -77,9 +77,13 @@ function preparePost() {
     while (i--) {
 
         if (!keys[i].includes("@") && !keys[i].includes("lastInsertedId") && !keys[i].includes("newcomment") && !keys[i].includes("newlist"))
-            archive[keys[i]] = JSON.parse(localStorage.getItem(keys[i]));
+            archive.push(JSON.parse(localStorage.getItem(keys[i])));
     }
     var card = "";
+
+    archive = archive.sort((a, b) => {
+        return moment(b.time).diff(moment(a.time))
+    })
     for (var key in archive) {
         if (archive.hasOwnProperty(key)) {
             var Data = archive[key];
@@ -89,16 +93,15 @@ function preparePost() {
             const imageSrc = user && user.imagesrc ? user.imagesrc : "./images/avatar.jpg";
 
             noPost = keys.length;
-            console.log("data is     " + Data.name);
             card += ' <div class=\"box\">\n';
             //       card += '                <i class=\"fa fa-behance fa-3x\" aria-hidden=\"true\"></i>\n';
             card += '<img width="50" height="50"  src=' + imageSrc + ' >'
             card += '                <div class=\"box-title\">\n';
 
             if (Data.hasOwnProperty("location"))
-                card += '                  <h3>' + Data.name + "     " + "is at " + Data.location + '</h3>\n<span class=\"text-muted\">' + key + '</span>\n';
+                card += '                  <h3>' + Data.name + "     " + "is at " + Data.location + '</h3>\n<span class=\"text-muted\">' + Data.time + '</span>\n';
             else
-                card += '                  <h3>' + Data.name + '</h3>\n<span class=\"text-muted\">' + key + '</span>\n';
+                card += '                  <h3>' + Data.name + '</h3>\n<span class=\"text-muted\">' + moment(Data.time).fromNow() + '</span>\n';
             card += '                </div>\n';
             card += '                <div class=\"box-text\" style="overflow-wrap: break-word;">\n';
             card += '                  <span>' + Data.text + '</span>\n';
@@ -126,12 +129,11 @@ function preparePost() {
 
 
             card += '                <div class=\"box-btn\">\n';
-            card += '                    <input type=\"text\" placeholder="write a comment" class="form-control" rows="5" name="' + key + '" id="Comment" >\n';
+            card += '                    <input type=\"text\" placeholder="write a comment" class="form-control" rows="5" name="' + Data.time + '" id="Comment" >\n';
             card += '               </div>\n';
             card += '               </div>';
             card += '<hr><br><br>'
         }
-
     }
     return card;
 }
