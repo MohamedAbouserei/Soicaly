@@ -1,10 +1,11 @@
 class Post {
-    constructor(text, location, name, time) {
+    constructor(text, location, name, email, time) {
         this.text = text;
         this.location = location;
         this.name = name;
         this.time = time;
         this.comments = [];
+        this.email = email;
     }
     storePost = function () {
         localStorage.setItem(this.time, JSON.stringify(this));
@@ -32,8 +33,8 @@ getPostData = function (local) {
         var dateTime = date + ' ' + time;
         var email = sessionStorage.getItem("onlineuser");
 
-        console.log(User.getObjectbyEmail(email))
-        newpost = new Post(posttext, local, JSON.parse(User.getObjectbyEmail(email)).name, dateTime)
+        var user = JSON.parse(User.getObjectbyEmail(email))
+        newpost = new Post(posttext, local, user.name, user.email, dateTime)
         document.getElementById("posttext").value = "";
         newpost.storePost();
         $("#exampleModal").modal("hide");
@@ -82,16 +83,16 @@ function preparePost() {
     for (var key in archive) {
         if (archive.hasOwnProperty(key)) {
             var Data = archive[key];
-            img = new Image();
-            img.src=Data.imagesrc
-            img.width=100
-            
-            img.outerHTML;
+
+            var user = JSON.parse(User.getObjectbyEmail(Data.email));
+
+            const imageSrc = user && user.imagesrc ? user.imagesrc : "./images/avatar.jpg";
+
             noPost = keys.length;
             console.log("data is     " + Data.name);
             card += ' <div class=\"box\">\n';
-           card += '                <i class=\"fa fa-behance fa-3x\" aria-hidden=\"true\"></i>\n';
-           //card += '<img src=' + Data.imagesrc + ' >'
+            //       card += '                <i class=\"fa fa-behance fa-3x\" aria-hidden=\"true\"></i>\n';
+            card += '<img width="50" height="50"  src=' + imageSrc + ' >'
             card += '                <div class=\"box-title\">\n';
 
             if (Data.hasOwnProperty("location"))
@@ -128,6 +129,7 @@ function preparePost() {
             card += '                    <input type=\"text\" placeholder="write a comment" class="form-control" rows="5" name="' + key + '" id="Comment" >\n';
             card += '               </div>\n';
             card += '               </div>';
+            card += '<hr><br><br>'
         }
 
     }
@@ -189,25 +191,29 @@ function prepareUsers() {
         if (archive.hasOwnProperty(key)) {
 
             var Data = archive[key];
-           // document.getElementById("baseimage").src=Data.imagesrc
-           img = new Image();
-           img.src=Data.imagesrc
-           img.width=100
-           
-           img.outerHTML;
+            // document.getElementById("baseimage").src=Data.imagesrc
+            /*    if (Data.imagesrc) {
+                   img = new Image();
+                   img.src = Data.imagesrc
+                   img.width = 100
+
+                   img.outerHTML;
+               } */
+            const imageSrc = Data.imagesrc ? Data.imagesrc : "./images/avatar.jpg";
 
 
             record += '                                  <tr>\n';
             record += '                                      <td>\n';
-           
-           //record += '          <img src=\"https://bootdey.com/img/Content/user_1.jpg\" alt=\"\">\n';
-            record+=' <img src='+ Data.imagesrc + ' width=80px>'
 
-        //    if(Data.hasOwnProperty(imagesrc))
-        //    {
-        //     record+='<img src=' + Data.imagesrc +'>'
-        //    }
-        
+            //record += '          <img src=\"https://bootdey.com/img/Content/user_1.jpg\" alt=\"\">\n';
+            record += '<img width="50" height="50"  src=' + imageSrc + ' >'
+
+
+            //    if(Data.hasOwnProperty(imagesrc))
+            //    {
+            //     record+='<img src=' + Data.imagesrc +'>'
+            //    }
+
 
             record += '                                          <a href=\"#\" class=\"user-link\">' + Data.name + '</a>\n';
             record += '                                      </td>\n';
@@ -219,7 +225,7 @@ function prepareUsers() {
             record += '                                      </td>\n';
 
             record += '                                      <td style=\"width: 20%;\">\n';
-            record += '                                          <a href=\"#\" data-email="'+Data.email+'" onclick="onChatButtonClick(this)" class=\"table-link\">\n';
+            record += '                                          <a href=\"#\" data-email="' + Data.email + '" onclick="onChatButtonClick(this)" class=\"table-link\">\n';
             record += '                                              <span class=\"fa-stack\">\n';
             record += '                                                  <i class=\"fa fa-square fa-stack-2x\"></i>\n';
             record += '                                                  <i class=\"fa fa-comment fa-stack-1x fa-inverse\"></i>\n';
