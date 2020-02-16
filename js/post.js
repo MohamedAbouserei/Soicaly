@@ -193,6 +193,7 @@ function prepareUsers() {
         if (archive.hasOwnProperty(key)) {
 
             var Data = archive[key];
+            if(Data.email!=sessionStorage.getItem('onlineuser')){
             // document.getElementById("baseimage").src=Data.imagesrc
             /*    if (Data.imagesrc) {
                    img = new Image();
@@ -238,6 +239,7 @@ function prepareUsers() {
 
         }
     }
+}
     return record
 }
 
