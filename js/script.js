@@ -47,8 +47,11 @@ class User {
         return archive;
     }
     static logout = function () {
-        console.log("logging out")
+        var returnedObj=JSON.parse(User.getObjectbyEmail(sessionStorage.getItem("onlineuser")));
+        returnedObj.status=false;
+        User.storeObjectllo(returnedObj)
         sessionStorage.removeItem("onlineuser");
-        location.replace("./signIn.html")
+        window.location.replace("./signIn.html");
+        localStorage.setItem("newlist","1");
     }
 }

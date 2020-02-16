@@ -30,6 +30,8 @@ function changeImagePhoto(e) {
 myemail = sessionStorage.getItem("onlineuser");
 
 var sessionobj = JSON.parse(User.getObjectbyEmail(myemail));
+sessionobj.status=true
+User.storeObjectllo(sessionobj)
 window.addEventListener("load", setInputField);
 
 function setInputField() {
@@ -102,4 +104,16 @@ function validatePhonenumber() {
         errors.innerHTML = str;
         return false;
     }
+}
+ window.onbeforeunload = closingCode;
+ 
+function closingCode() {
+    console.log("on for unload")
+    var returnedObj=JSON.parse(User.getObjectbyEmail(sessionStorage.getItem("onlineuser")));
+        returnedObj.status=false;
+        User.storeObjectllo(returnedObj)
+        //sessionStorage.removeItem("onlineuser");
+        window.location.replace("./signIn.html");
+        localStorage.setItem("newlist","1");
+    return null;
 }

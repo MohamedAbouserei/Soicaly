@@ -14,9 +14,9 @@ function printEmail() {
 				var test = JSON.parse(returnedObj);
 				if (email.value == test.email && password.value == test.password) {
 					console.log("Donnnnnnnnnnne")
-					// User.storeToSessionStorage(test)
-					test.status = 1;
-					// User.storeToSessionStorage(test)
+					//sessionStorage.setItem("onlineuser",test)
+					test.status = true;
+					 User.storeObjectllo(test);
 					error.innerHTML = ""
 					var userEmail = email.value;
 					console.log(userEmail)

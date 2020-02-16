@@ -244,10 +244,20 @@ function prepareUsers() {
     return record
 }
 
-/* window.onbeforeunload = closingCode;
- */
+ window.onbeforeunload = closingCode;
+ 
 function closingCode() {
     console.log("on for unload")
-    User.logout();
+    var returnedObj=JSON.parse(User.getObjectbyEmail(sessionStorage.getItem("onlineuser")));
+        returnedObj.status=false;
+        User.storeObjectllo(returnedObj)
+        //sessionStorage.removeItem("onlineuser");
+        window.location.replace("./signIn.html");
+        localStorage.setItem("newlist","1");
     return null;
 }
+myemail = sessionStorage.getItem("onlineuser");
+
+var sessionobj = JSON.parse(User.getObjectbyEmail(myemail));
+sessionobj.status=true
+User.storeObjectllo(sessionobj)
