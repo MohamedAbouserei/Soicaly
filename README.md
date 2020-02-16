@@ -12,19 +12,12 @@ To run this Project locally
 1-git clone https://github.com/sabreensalama/Soicaly.git
 ```
 ```
-2-running sigup.html in browser
+2-OPen sigup.html in browser
+```
+
 ```
 ```
-3-running siginin.html in browser
-```
-```
-4-runing pots.html to make comments and create posts
-```
-```
-5-running profile.html to change setting of account
-```
-```
-To run this project life :
+To run this project live :
 ```
 ```
 https://socialyv3.000webhostapp.com/posts.html#
@@ -59,10 +52,4 @@ google chrome
 * **mohamed salama**
 
 
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
