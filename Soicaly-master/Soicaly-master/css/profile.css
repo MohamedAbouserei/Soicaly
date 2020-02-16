@@ -1,6 +1,4 @@
-*{
-  font-family: 'Sriracha', cursive;
-}
+
 .navbar
 {
 
@@ -101,9 +99,4 @@ label.logo{
 	cursor: pointer;
 	padding: 10px 5px;
 	margin: 10px 5px;
- }
- footer{
-   text-align:center;
-   background-color: #00D6D9;
-   padding-bottom: 0px;
  }

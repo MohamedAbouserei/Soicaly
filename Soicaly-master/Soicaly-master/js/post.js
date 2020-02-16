@@ -1,11 +1,10 @@
 class Post {
-    constructor(text, location, name, email, time) {
+    constructor(text, location, name, time) {
         this.text = text;
         this.location = location;
         this.name = name;
         this.time = time;
         this.comments = [];
-        this.email = email;
     }
     storePost = function () {
         localStorage.setItem(this.time, JSON.stringify(this));
@@ -33,8 +32,8 @@ getPostData = function (local) {
         var dateTime = date + ' ' + time;
         var email = sessionStorage.getItem("onlineuser");
 
-        var user = JSON.parse(User.getObjectbyEmail(email))
-        newpost = new Post(posttext, local, user.name, user.email, dateTime)
+        console.log(User.getObjectbyEmail(email))
+        newpost = new Post(posttext, local, JSON.parse(User.getObjectbyEmail(email)).name, dateTime)
         document.getElementById("posttext").value = "";
         newpost.storePost();
         $("#exampleModal").modal("hide");
@@ -77,31 +76,22 @@ function preparePost() {
     while (i--) {
 
         if (!keys[i].includes("@") && !keys[i].includes("lastInsertedId") && !keys[i].includes("newcomment") && !keys[i].includes("newlist"))
-            archive.push(JSON.parse(localStorage.getItem(keys[i])));
+            archive[keys[i]] = JSON.parse(localStorage.getItem(keys[i]));
     }
     var card = "";
-
-    archive = archive.sort((a, b) => {
-        return moment(b.time).diff(moment(a.time))
-    })
     for (var key in archive) {
         if (archive.hasOwnProperty(key)) {
             var Data = archive[key];
-
-            var user = JSON.parse(User.getObjectbyEmail(Data.email));
-
-            const imageSrc = user && user.imagesrc ? user.imagesrc : "./images/avatar.jpg";
-
             noPost = keys.length;
+            console.log("data is     " + Data.name);
             card += ' <div class=\"box\">\n';
-            //       card += '                <i class=\"fa fa-behance fa-3x\" aria-hidden=\"true\"></i>\n';
-            card += '<img width="50" height="50"  src=' + imageSrc + ' >'
+            card += '                <i class=\"fa fa-behance fa-3x\" aria-hidden=\"true\"></i>\n';
             card += '                <div class=\"box-title\">\n';
 
             if (Data.hasOwnProperty("location"))
-                card += '                  <h3>' + Data.name + "     " + "is at " + Data.location + '</h3>\n<span class=\"text-muted\">' + Data.time + '</span>\n';
+                card += '                  <h3>' + Data.name + "     " + "is at " + Data.location + '</h3>\n<span class=\"text-muted\">' + key + '</span>\n';
             else
-                card += '                  <h3>' + Data.name + '</h3>\n<span class=\"text-muted\">' + moment(Data.time).fromNow() + '</span>\n';
+                card += '                  <h3>' + Data.name + '</h3>\n<span class=\"text-muted\">' + key + '</span>\n';
             card += '                </div>\n';
             card += '                <div class=\"box-text\" style="overflow-wrap: break-word;">\n';
             card += '                  <span>' + Data.text + '</span>\n';
@@ -129,11 +119,11 @@ function preparePost() {
 
 
             card += '                <div class=\"box-btn\">\n';
-            card += '                    <input type=\"text\" placeholder="write a comment" class="form-control" rows="5" name="' + Data.time + '" id="Comment" >\n';
+            card += '                    <input type=\"text\" placeholder="write a comment" class="form-control" rows="5" name="' + key + '" id="Comment" >\n';
             card += '               </div>\n';
             card += '               </div>';
-            card += '<hr><br><br>'
         }
+
     }
     return card;
 }
@@ -191,33 +181,12 @@ function prepareUsers() {
     var record = "";
     for (var key in archive) {
         if (archive.hasOwnProperty(key)) {
-
             var Data = archive[key];
-            if(Data.email!=sessionStorage.getItem('onlineuser')){
-            // document.getElementById("baseimage").src=Data.imagesrc
-            /*    if (Data.imagesrc) {
-                   img = new Image();
-                   img.src = Data.imagesrc
-                   img.width = 100
-
-                   img.outerHTML;
-               } */
-            const imageSrc = Data.imagesrc ? Data.imagesrc : "./images/avatar.jpg";
-
-
+                if(Data.email!=sessionStorage.getItem('onlineuser'))
+{
             record += '                                  <tr>\n';
             record += '                                      <td>\n';
-
-            //record += '          <img src=\"https://bootdey.com/img/Content/user_1.jpg\" alt=\"\">\n';
-            record += '<img width="50" height="50"  src=' + imageSrc + ' >'
-
-
-            //    if(Data.hasOwnProperty(imagesrc))
-            //    {
-            //     record+='<img src=' + Data.imagesrc +'>'
-            //    }
-
-
+            record += '                                          <img src=\"https://bootdey.com/img/Content/user_1.jpg\" alt=\"\">\n';
             record += '                                          <a href=\"#\" class=\"user-link\">' + Data.name + '</a>\n';
             record += '                                      </td>\n';
             record += '                                      <td class=\"text-center\">\n';
@@ -228,7 +197,7 @@ function prepareUsers() {
             record += '                                      </td>\n';
 
             record += '                                      <td style=\"width: 20%;\">\n';
-            record += '                                          <a href=\"#\" data-email="' + Data.email + '" onclick="onChatButtonClick(this)" class=\"table-link\">\n';
+            record += '                                          <a href=\"#\" class=\"table-link\">\n';
             record += '                                              <span class=\"fa-stack\">\n';
             record += '                                                  <i class=\"fa fa-square fa-stack-2x\"></i>\n';
             record += '                                                  <i class=\"fa fa-comment fa-stack-1x fa-inverse\"></i>\n';

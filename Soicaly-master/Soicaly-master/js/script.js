@@ -8,13 +8,13 @@ class User {
         this.phone = "";
     }
     static storeObjectllo = function (userObject) {        
-/*         if (!userObject.id) {
+        if (!userObject.id) {
             var lastInsertedId = JSON.parse(localStorage.getItem("lastInsertedId"));
             lastInsertedId = lastInsertedId ? lastInsertedId : 0;
             userObject.id = ++lastInsertedId;
         }
 
-        localStorage.setItem("lastInsertedId", lastInsertedId); */
+        localStorage.setItem("lastInsertedId", lastInsertedId);
         localStorage.setItem(userObject.email, JSON.stringify(userObject));
     }
     static getAllObjects = function () {
