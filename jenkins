@@ -1,0 +1,8 @@
+import groovy.io.FileType
+
+def fileList = []
+
+def dir = new File(".")
+dir.eachFileRecurse (FileType.FILES) { file ->
+  fileList << file
+}
