@@ -1,8 +1,18 @@
-import groovy.io.FileType
+pipeline {
+   agent any
 
-def fileList = []
+   stages {
+      stage('Build') {
+         steps {
+            // Get some code from a GitHub repository
+            git 'https://github.com/MohamedAbouserei/Soicaly.git'
 
-def dir = new File(".")
-dir.eachFileRecurse (FileType.FILES) { file ->
-  fileList << file
+            // Run Maven on a Unix agent.
+            sh "ls"
+
+            // To run Maven on a Windows agent, use
+            // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+         }
+      }
+   }
 }
